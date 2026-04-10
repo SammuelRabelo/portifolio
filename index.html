@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sammuel Rabelo — Portfólio BI & Dados</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --accent: #00d4ff;
+    --accent2: #7c3aed;
+    --accent3: #10b981;
+    --text: #f0f0f5;
+    --muted: #8888aa;
+    --border: rgba(255,255,255,0.07);
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── GRID BG ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 60px;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.2);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero-title .highlight {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 480px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #000;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,212,255,0.3);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 14px 28px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(255,255,255,0.2);
+    color: var(--accent);
+  }
+
+  /* Hero visual */
+  .hero-visual {
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, rgba(0,212,255,0.12), transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-card-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .stat-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ── SOBRE ── */
+  #sobre {
+    padding: 120px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+
+  .sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .sobre-text {
+    font-size: 1.05rem;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.85;
+  }
+
+  .sobre-text p + p { margin-top: 16px; }
+
+  .social-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+
+  .social-link:hover {
+    color: var(--accent);
+    border-color: rgba(0,212,255,0.3);
+    background: rgba(0,212,255,0.05);
+  }
+
+  /* ── HABILIDADES ── */
+  #habilidades {
+    padding: 120px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 48px;
+  }
+
+  .skill-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: all 0.25s;
+    cursor: default;
+  }
+
+  .skill-item:hover {
+    border-color: rgba(0,212,255,0.3);
+    background: rgba(0,212,255,0.04);
+    transform: translateY(-3px);
+  }
+
+  .skill-icon {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .skill-name {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .skill-level {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ── PROJETOS ── */
+  #projetos {
+    padding: 120px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .projects-list {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .project-card:hover { border-color: rgba(0,212,255,0.2); }
+
+  .project-header {
+    padding: 40px 48px 32px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .project-number {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .project-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    max-width: 520px;
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid;
+  }
+
+  .tag-blue { color: var(--accent); border-color: rgba(0,212,255,0.25); background: rgba(0,212,255,0.06); }
+  .tag-purple { color: #a78bfa; border-color: rgba(124,58,237,0.25); background: rgba(124,58,237,0.06); }
+  .tag-green { color: var(--accent3); border-color: rgba(16,185,129,0.25); background: rgba(16,185,129,0.06); }
+
+  /* Vídeo */
+  .project-video-wrap {
+    padding: 40px 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .video-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .video-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,212,255,0.03), rgba(124,58,237,0.03));
+  }
+
+  .play-btn {
+    width: 64px; height: 64px;
+    background: rgba(0,212,255,0.1);
+    border: 2px solid rgba(0,212,255,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.2s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .play-btn:hover {
+    background: rgba(0,212,255,0.2);
+    transform: scale(1.1);
+  }
+
+  .video-caption {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-align: center;
+    position: relative;
+  }
+
+  /* Responsável por exibir o iframe de vídeo */
+  .video-frame-wrap {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    display: none;
+  }
+
+  .video-frame-wrap iframe {
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  /* Descrição do projeto */
+  .project-body {
+    padding: 40px 48px;
+  }
+
+  .project-desc-title {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .project-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  .project-section h4 {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .project-section p, .project-section li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  .project-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .project-section ul li {
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+
+  .project-section ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+    top: 2px;
+  }
+
+  .screens-list {
+    margin-bottom: 32px;
+  }
+
+  .screen-item {
+    border-left: 2px solid var(--border);
+    padding: 12px 0 12px 20px;
+    margin-bottom: 8px;
+    transition: border-color 0.2s;
+  }
+
+  .screen-item:hover { border-color: var(--accent); }
+
+  .screen-name {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .screen-desc {
+    font-size: 0.83rem;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .project-ctas {
+    display: flex;
+    gap: 12px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── CONTATO ── */
+  #contato {
+    padding: 120px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .contato-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contato-inner .section-label { justify-content: center; display: flex; }
+
+  .contato-desc {
+    color: var(--muted);
+    font-size: 1.05rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+    margin-top: 16px;
+  }
+
+  .contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    margin-bottom: 40px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 24px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+  }
+
+  .contact-item:hover {
+    border-color: rgba(0,212,255,0.3);
+    background: rgba(0,212,255,0.04);
+  }
+
+  .contact-icon {
+    width: 40px; height: 40px;
+    background: var(--surface2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .contact-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  .contact-value {
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .container { padding: 0 24px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
+    .project-sections { grid-template-columns: 1fr; }
+    .project-header { flex-direction: column; padding: 28px 24px; }
+    .project-video-wrap { padding: 24px; }
+    .project-body { padding: 28px 24px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">SR<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#habilidades">Skills</a></li>
+    <li><a href="#projetos">Projetos</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag">Disponível para novas oportunidades</div>
+        <h1 class="hero-title">
+          Sammuel<br>
+          <span class="highlight">Rabelo</span>
+        </h1>
+        <p class="hero-sub">Analista de BI & Dados — transformo dados em decisões estratégicas com Power BI, SQL e DAX.</p>
+        <div class="hero-ctas">
+          <a href="#projetos" class="btn-primary">Ver projetos →</a>
+          <a href="#contato" class="btn-secondary">Entre em contato</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-card">
+          <p class="hero-card-label">Stack principal</p>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-value">DAX</div>
+              <div class="stat-label">Cálculos avançados</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">SQL</div>
+              <div class="stat-label">Extração de dados</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">PBI</div>
+              <div class="stat-label">Power BI Desktop</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">ETL</div>
+              <div class="stat-label">Power Query</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="fade-in">
+        <p class="section-label">// sobre mim</p>
+        <h2 class="section-title">Dados que<br>contam histórias</h2>
+      </div>
+      <div class="fade-in">
+        <div class="sobre-text">
+          <p>Sou especialista em Power BI com foco em soluções de Business Intelligence que realmente impactam o negócio. Crio dashboards que vão além da visualização — são ferramentas de decisão que conectam dados brutos a estratégia comercial.</p>
+          <p>Minha abordagem combina engenharia de dados (SQL Server, ETL, modelagem) com análise avançada em DAX, entregando relatórios que o time de gestão realmente usa. Atualmente em transição para posições de Analista e Engenheiro de Dados.</p>
+        </div>
+        <div class="social-links">
+          <a href="https://github.com/SammuelRabelo" target="_blank" class="social-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/sammuelrabelo" target="_blank" class="social-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HABILIDADES -->
+<section id="habilidades">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">// habilidades</p>
+      <h2 class="section-title">Stack & Ferramentas</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-item fade-in">
+        <span class="skill-icon">📊</span>
+        <div class="skill-name">Power BI</div>
+        <div class="skill-level">Desktop & Service</div>
+      </div>
+      <div class="skill-item fade-in">
+        <span class="skill-icon">⚡</span>
+        <div class="skill-name">DAX</div>
+        <div class="skill-level">Avançado</div>
+      </div>
+      <div class="skill-item fade-in">
+        <span class="skill-icon">🗄️</span>
+        <div class="skill-name">SQL</div>
+        <div class="skill-level">SQL Server</div>
+      </div>
+      <div class="skill-item fade-in">
+        <span class="skill-icon">🔄</span>
+        <div class="skill-name">Power Query</div>
+        <div class="skill-level">ETL & M</div>
+      </div>
+      <div class="skill-item fade-in">
+        <span class="skill-icon">📋</span>
+        <div class="skill-name">Excel</div>
+        <div class="skill-level">Avançado</div>
+      </div>
+      <div class="skill-item fade-in">
+        <span class="skill-icon">🎨</span>
+        <div class="skill-name">CSS</div>
+        <div class="skill-level">UI / Frontend</div>
+      </div>
+      <div class="skill-item fade-in">
+        <span class="skill-icon">🧩</span>
+        <div class="skill-name">Data Modeling</div>
+        <div class="skill-level">Star Schema</div>
+      </div>
+      <div class="skill-item fade-in">
+        <span class="skill-icon">📐</span>
+        <div class="skill-name">KPI Design</div>
+        <div class="skill-level">Métricas & Metas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETOS -->
+<section id="projetos">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">// projetos</p>
+      <h2 class="section-title">Cases de BI</h2>
+    </div>
+
+    <div class="projects-list">
+
+      <!-- PROJETO 1 -->
+      <div class="project-card fade-in">
+
+        <div class="project-header">
+          <div>
+            <p class="project-number">// projeto 01</p>
+            <h3 class="project-title">Relatório de Gestão Estratégica e Metas</h3>
+            <div class="project-tags">
+              <span class="tag tag-blue">Power BI</span>
+              <span class="tag tag-purple">DAX Avançado</span>
+              <span class="tag tag-green">SQL Server</span>
+              <span class="tag tag-blue">Power Query</span>
+              <span class="tag tag-green">Excel / OneDrive</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- VÍDEO -->
+        <div class="project-video-wrap">
+          <p class="project-desc-title">Demonstração do dashboard</p>
+
+          <!-- Substitua o src pelo link do seu vídeo (YouTube embed, Loom, etc.) -->
+          <!-- Exemplo YouTube: https://www.youtube.com/embed/SEU_VIDEO_ID -->
+          <!-- Exemplo Loom:    https://www.loom.com/embed/SEU_VIDEO_ID      -->
+
+          <div class="video-placeholder" id="video-placeholder-1">
+            <div class="play-btn" onclick="loadVideo(1)">▶</div>
+            <div class="video-caption">
+              Clique para reproduzir o demo do dashboard<br>
+              <small style="opacity:0.5">Cole o link embed do seu vídeo no código para ativar</small>
+            </div>
+          </div>
+
+          <div class="video-frame-wrap" id="video-frame-1">
+            <!-- INSTRUÇÃO: substitua o src abaixo pelo seu link embed real -->
+            <iframe src="COLE_AQUI_O_LINK_EMBED_DO_VIDEO" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <!-- DESCRIÇÃO -->
+        <div class="project-body">
+          <p class="project-desc-title">Sobre o projeto</p>
+
+          <div class="project-sections">
+            <div class="project-section">
+              <h4>Contexto & Desafio</h4>
+              <p>Monitorar metas com alta granularidade num cenário onde o ERP nativo não atendia à visão estratégica da gerência — as classificações de produtos engessavam a definição de metas por região e grupo.</p>
+            </div>
+            <div class="project-section">
+              <h4>Arquitetura da Solução</h4>
+              <ul>
+                <li>Extração direta via SQL Server para dados transacionais em tempo real</li>
+                <li>Planilha "De/Para" no Excel/OneDrive como segunda camada de classificação dinâmica</li>
+                <li>Solução híbrida: flexibilidade sem perder a integração com o ERP</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="project-desc-title">As 4 telas do relatório</p>
+          <div class="screens-list">
+            <div class="screen-item">
+              <div class="screen-name">Tela 1 — Metas e Desempenho por Grupo</div>
+              <div class="screen-desc">KPIs de progresso com velocímetros (gauge) por grupo de produto (Blondor, C.Touch, KP, Illumina) + tabela comparativa YoY.</div>
+            </div>
+            <div class="screen-item">
+              <div class="screen-name">Tela 2 — Visão Geral de Grupos</div>
+              <div class="screen-desc">Composição de carteira com gráficos de rosca por quantidade e valor financeiro. Matriz cruzando meses × Itens Vendidos, Ticket Médio e Faturamento.</div>
+            </div>
+            <div class="screen-item">
+              <div class="screen-name">Tela 3 — Visão Geral de Regionais</div>
+              <div class="screen-desc">Distribuição geográfica com barras por regional (CBA I, Interior II, Televendas). Tabelas de calor para identificar onde a meta é mais pressionada.</div>
+            </div>
+            <div class="screen-item">
+              <div class="screen-name">Tela 4 — Crescimento e Oportunidades</div>
+              <div class="screen-desc">Inteligência comercial: progressão de faturamento, crescimento de positivação e tabela de clientes inativos com "Dias Sem Comprar" por grupo de produto.</div>
+            </div>
+          </div>
+
+          <div style="background: rgba(0,212,255,0.05); border: 1px solid rgba(0,212,255,0.15); border-radius: 12px; padding: 20px 24px; margin-bottom: 32px;">
+            <p style="font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:8px;">Diferencial estratégico</p>
+            <p style="font-size:0.9rem; color:var(--muted); font-weight:300;">A tela de Oportunidades transforma dados passivos em ação comercial — identifica exatamente quais clientes estão inativos e há quantos dias não adquirem um item específico, permitindo recuperação de carteira com precisão cirúrgica.</p>
+          </div>
+
+          <div class="project-ctas">
+            <a href="https://github.com/SammuelRabelo" target="_blank" class="btn-secondary">Ver no GitHub</a>
+          </div>
+        </div>
+      </div>
+      <!-- FIM PROJETO 1 -->
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="container">
+    <div class="contato-inner fade-in">
+      <p class="section-label">// contato</p>
+      <h2 class="section-title">Vamos conversar?</h2>
+      <p class="contato-desc">Estou aberto a oportunidades em análise de dados, BI e engenharia de dados. Me chame!</p>
+
+      <div class="contact-grid">
+        <a href="https://www.linkedin.com/in/sammuelrabelo" target="_blank" class="contact-item">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">linkedin.com/in/sammuelrabelo</div>
+          </div>
+        </a>
+
+        <a href="https://github.com/SammuelRabelo" target="_blank" class="contact-item">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">github.com/SammuelRabelo</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Sammuel Rabelo</span>
+  <span style="color:var(--border)">Feito com HTML, CSS & Power BI</span>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Video loader
+  function loadVideo(id) {
+    const placeholder = document.getElementById('video-placeholder-' + id);
+    const frame = document.getElementById('video-frame-' + id);
+    placeholder.style.display = 'none';
+    frame.style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
